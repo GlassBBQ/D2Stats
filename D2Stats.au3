@@ -249,7 +249,7 @@ func HotKey_CopyItemsToClipboard()
 endfunc
 
 func HotKey_CopyItem($TEST = False)
-	if ($TEST or not IsIngame() or GetIlvl() == 0) then return
+	if ($TEST or not IsIngame()) then return
 
 	local $hTimerRetry = TimerInit()
 	local $sOutput = ""
