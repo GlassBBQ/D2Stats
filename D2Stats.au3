@@ -278,6 +278,12 @@ func HotKey_CopyItem($TEST = False)
 	for $i = $asLines[0] to 1 step -1
 		if ($asLines[$i] <> "") then $sOutput &= $asLines[$i] & @CRLF
 	next
+	
+	if (_GUI_Option("write-file")) then
+		Local $hFileOpen = FileOpen(@ScriptDir & '\items.txt', 1)
+		FileWrite($hFileOpen, $sOutput & "-----------------------------------" & @crlf)
+		FileClose($hFileOpen)
+	endif
 
 	ClipPut($sOutput)
 	PrintString("Item text copied.")
@@ -1889,6 +1895,7 @@ func DefineGlobals()
 		["notify-superior", 0, "cb", "Notifier prefixes superior items with 'Superior'"], _
 		["copy", 0x002D, "hk", "Copy item text", "HotKey_CopyItem"], _
 		["copy-name", 0, "cb", "Only copy item name"], _
+		["write-file", 0, "cb", "Add to items.txt File"], _
 		["filter", 0x0124, "hk", "Inject/eject DropFilter", "HotKey_DropFilter"], _
 		["toggle", 0x0024, "hk", "Switch Show Items between hold/toggle mode", "HotKey_ToggleShowItems"], _
 		["toggleMsg", 1, "cb", "Message when Show Items is disabled in toggle mode"], _
